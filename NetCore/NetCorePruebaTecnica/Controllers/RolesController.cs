@@ -1,19 +1,17 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Threading.Tasks;
-using System.Web.Http;
-using TechTest.Authentication;
+using System.Security.Claims;
 using TechTest.DTO;
-using TechTest.Models;
-using TechTest.Services;
 using TechTest.Services.Interface;
 
 
 namespace TechTest.Controllers
 {
-    [RoutePrefix("api/roles")]
-    [JwtAuthAdmin]
-    public class RolesController : ApiController
+    [ApiController]
+    [Route("api")]
+    [Authorize]
+    public class RolesController : ControllerBase
     {
         private readonly IRolesService _rolesService;
 
@@ -24,7 +22,7 @@ namespace TechTest.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IHttpActionResult> GetRolesAsycn()
+        public async Task<IActionResult> GetRolesAsycn()
         {
             var roles = await _rolesService.GetAllAsync();
             if (roles.Any())
@@ -35,7 +33,7 @@ namespace TechTest.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IHttpActionResult> GetRoles(int id)
+        public async Task<IActionResult> GetRoles(int id)
         {
             var role = await _rolesService.GetByIdAsync(id);
             if (role == null)
@@ -48,7 +46,7 @@ namespace TechTest.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IHttpActionResult> PutRoles(int id, [FromBody] RolesDTO roles)
+        public async Task<IActionResult> PutRoles(int id, [FromBody] RolesDTO roles)
         {
             if (!ModelState.IsValid)
             {
@@ -64,12 +62,12 @@ namespace TechTest.Controllers
             if (check != null)
                 return BadRequest("Failed to update");
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Created();
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IHttpActionResult> PostRoles([FromBody] RolesDTO roles)
+        public async Task<IActionResult> PostRoles([FromBody] RolesDTO roles)
         {
             if (!ModelState.IsValid)
             {
@@ -78,12 +76,12 @@ namespace TechTest.Controllers
 
             await _rolesService.InsertAsync(roles);
 
-            return StatusCode(HttpStatusCode.Created);
+            return Created();
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IHttpActionResult> DeleteRoles(int id)
+        public async Task<IActionResult> DeleteRoles(int id)
         {
             var roles = await _rolesService.DeleteAsync(id);
             if (roles == null)
@@ -94,9 +92,20 @@ namespace TechTest.Controllers
             return Ok(roles);
         }
 
-        protected override void Dispose(bool disposing)
+        private bool isAdmin() 
         {
-            base.Dispose(disposing);
+            // Cast to ClaimsIdentity.
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            // Gets list of claims.
+            IEnumerable<Claim> claim = identity.Claims;
+
+            // Gets name from claims. Generally it's an email address.
+            var usernameClaim = claim
+                .Where(x => x.Type == ClaimTypes.Role)
+                .FirstOrDefault();
+
+            return usernameClaim?.Value.Equals("Admin") ?? false;
         }
     }
 }
