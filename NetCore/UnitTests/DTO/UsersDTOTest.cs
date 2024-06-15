@@ -60,7 +60,7 @@ namespace UnitTests.DTO
             Password = "Password",
             Email = "Email",
             Phone = "Phone",
-            Role = "1",
+            RoleId = 1,
         };
     }
 }

@@ -9,8 +9,8 @@ using TechTest.Services.Interface;
 namespace TechTest.Controllers
 {
     [ApiController]
-    [Route("api")]
-    [Authorize]
+    [Route("api/roles")]
+    //[Authorize]
     public class RolesController : ControllerBase
     {
         private readonly IRolesService _rolesService;
@@ -24,6 +24,9 @@ namespace TechTest.Controllers
         [Route("")]
         public async Task<IActionResult> GetRolesAsycn()
         {
+            if (!isAdmin())
+                return Unauthorized();
+
             var roles = await _rolesService.GetAllAsync();
             if (roles.Any())
                 return Ok(roles);
@@ -35,6 +38,9 @@ namespace TechTest.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetRoles(int id)
         {
+            if (!isAdmin())
+                return Unauthorized();
+
             var role = await _rolesService.GetByIdAsync(id);
             if (role == null)
             {
@@ -48,10 +54,8 @@ namespace TechTest.Controllers
         [Route("{id}")]
         public async Task<IActionResult> PutRoles(int id, [FromBody] RolesDTO roles)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!isAdmin())
+                return Unauthorized();
 
             if (id != roles.Id)
             {
@@ -69,10 +73,8 @@ namespace TechTest.Controllers
         [Route("")]
         public async Task<IActionResult> PostRoles([FromBody] RolesDTO roles)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!isAdmin())
+                return Unauthorized();
 
             await _rolesService.InsertAsync(roles);
 
@@ -83,6 +85,9 @@ namespace TechTest.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteRoles(int id)
         {
+            if (!isAdmin())
+                return Unauthorized();
+
             var roles = await _rolesService.DeleteAsync(id);
             if (roles == null)
             {

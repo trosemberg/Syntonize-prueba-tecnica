@@ -43,7 +43,7 @@ namespace TechTest.Services
         public async Task<UsersDTO> UpdateAsync(UsersDTO usersDTO)
         {
             var user = _mapper.Map<Users>(usersDTO);
-            var role = await _rolesRepository.GetByNameAsync(usersDTO.Role);
+            var role = await _rolesRepository.GetByIdAsync(usersDTO.RoleId!.Value);
             user.RolesId = role?.Id;
             var dbUser = await _usersRepository.UpdateEntityAsync(user.Id, user);
             return _mapper.Map<UsersDTO>(dbUser);
@@ -60,7 +60,7 @@ namespace TechTest.Services
 
             user.Salt = salt;
 
-            var role = await _rolesRepository.GetByNameAsync(usersDTO.Role);
+            var role = await _rolesRepository.GetByIdAsync(usersDTO.RoleId!.Value);
             user.RolesId = role?.Id;
             await _usersRepository.InsertEntityAsync(user);
         }

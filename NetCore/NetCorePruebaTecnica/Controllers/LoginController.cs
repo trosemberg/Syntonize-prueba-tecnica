@@ -27,7 +27,7 @@ namespace TechTest.Controllers
                 return BadRequest("User Not Valid");
             }
 
-            users.Role = "UserAccess";
+            users.RoleId = 2;
             await _userService.InsertAsync(users);
 
             return Created();
@@ -54,7 +54,7 @@ namespace TechTest.Controllers
                 // TODO configure Logger and log
             }
 
-            return Ok(jwt);
+            return Ok(new { Token = jwt });
         }
     }
 }

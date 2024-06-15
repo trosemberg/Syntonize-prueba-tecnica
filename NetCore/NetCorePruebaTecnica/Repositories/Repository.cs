@@ -27,7 +27,7 @@ namespace TechTest.Repositories
 
         public async Task<T> GetByNameAsync(string name)
         {
-            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Name.Equals(name));
+            return await _dbSet.FirstOrDefaultAsync(x => x.Name.Equals(name));
         }
 
         public async Task InsertEntityAsync(T entity) 

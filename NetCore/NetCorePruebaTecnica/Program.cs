@@ -63,6 +63,7 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 
 builder.Services.AddScoped<DbContext, DBContext>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddScoped<IRepository<Users>, Repository<Users>>();
 builder.Services.AddScoped<IRepository<Roles>, Repository<Roles>>();
 

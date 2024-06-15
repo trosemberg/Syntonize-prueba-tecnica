@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Http.Results;
 using TechTest.Controllers;
 using TechTest.DTO;
 using TechTest.Models;
@@ -45,7 +41,7 @@ namespace UnitTests.Controllers
             userDTO.UserName = null;
             var result = await loginController.RegisterUsers(userDTO);
 
-            Assert.IsInstanceOfType(result, typeof(BadRequestErrorMessageResult));
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
 
         [TestMethod]
@@ -56,7 +52,7 @@ namespace UnitTests.Controllers
             loginDTO.UserName = null;
             var result = await loginController.Login(loginDTO);
 
-            Assert.IsInstanceOfType(result, typeof(BadRequestErrorMessageResult));
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
 
         [TestMethod]
@@ -69,7 +65,7 @@ namespace UnitTests.Controllers
 
             var result = await loginController.Login(loginDTO);
 
-            Assert.IsInstanceOfType(result, typeof(CreatedResult));
+            Assert.IsInstanceOfType(result, typeof(UnauthorizedResult));
         }
 
         [TestMethod]
@@ -81,7 +77,7 @@ namespace UnitTests.Controllers
             var loginDTO = CreateDefaultFilledLoginDTO();
             var result = await loginController.Login(loginDTO);
 
-            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<string>));
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
 
         private UsersDTO CreateDefaultFilledUserDTO() => new UsersDTO()
@@ -92,7 +88,7 @@ namespace UnitTests.Controllers
             Password = "Password",
             Email = "Email",
             Phone = "Phone",
-            Role = "1",
+            RoleId = 1,
         };
 
         private LoginDTO CreateDefaultFilledLoginDTO() => new LoginDTO()
