@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TechTest.DTO;
-using TechTest.Models;
+using TechTestData.Models;
 
 namespace TechTest.Mapper
 {

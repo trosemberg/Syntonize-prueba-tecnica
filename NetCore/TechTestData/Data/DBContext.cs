@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using TechTest.Models;
+using TechTestData.Models;
 
-namespace TechTest.Data
+namespace TechTestData.Data
 {
     public class DBContext : DbContext
     {

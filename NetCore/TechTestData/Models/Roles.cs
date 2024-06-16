@@ -1,4 +1,4 @@
-﻿namespace TechTest.Models
+﻿namespace TechTestData.Models
 {
     public class Roles : TEntity
     {

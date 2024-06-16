@@ -1,8 +1,8 @@
-﻿using TechTest.Repositories.Interface;
-using TechTest.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TechTestData.Repositories.Interface;
+using TechTestData.Models;
 
-namespace TechTest.Repositories
+namespace TechTestData.Repositories
 {
     public class Repository<T> : IRepository<T> where T : TEntity
     {

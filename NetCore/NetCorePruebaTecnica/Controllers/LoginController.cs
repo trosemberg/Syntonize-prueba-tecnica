@@ -27,7 +27,7 @@ namespace TechTest.Controllers
                 return BadRequest("User Not Valid");
             }
 
-            users.RoleId = 2;
+            users.RolesId = 2;
             await _userService.InsertAsync(users);
 
             return Created();

@@ -1,6 +1,6 @@
-﻿using TechTest.Models;
+﻿using TechTestData.Models;
 
-namespace TechTest.Repositories.Interface
+namespace TechTestData.Repositories.Interface
 {
     public interface IRepository<T> where T : TEntity
     {

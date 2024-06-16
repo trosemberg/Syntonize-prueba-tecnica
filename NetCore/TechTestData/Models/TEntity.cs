@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TechTest.Models
+namespace TechTestData.Models
 {
     [Index(nameof(Name), IsUnique = true)]
     public class TEntity

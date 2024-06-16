@@ -2,9 +2,9 @@
 using NSubstitute;
 using TechTest.Controllers;
 using TechTest.DTO;
-using TechTest.Models;
-using TechTest.Repositories.Interface;
 using TechTest.Services.Interface;
+using TechTestData.Models;
+using TechTestData.Repositories.Interface;
 
 namespace UnitTests.Controllers
 {
@@ -88,7 +88,7 @@ namespace UnitTests.Controllers
             Password = "Password",
             Email = "Email",
             Phone = "Phone",
-            RoleId = 1,
+            RolesId = 1,
         };
 
         private LoginDTO CreateDefaultFilledLoginDTO() => new LoginDTO()

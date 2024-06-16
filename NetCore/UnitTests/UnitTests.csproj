@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetCorePruebaTecnica\TechTest.csproj" />
+    <ProjectReference Include="..\TechTestData\TechTestData.csproj" />
   </ItemGroup>
 
   <ItemGroup>

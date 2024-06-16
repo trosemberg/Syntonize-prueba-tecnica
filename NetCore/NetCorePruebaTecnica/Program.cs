@@ -1,15 +1,15 @@
 using TechTest.Configuration;
 using TechTest.Services.Interface;
 using TechTest.Services;
-using TechTest.Repositories;
-using TechTest.Repositories.Interface;
-using TechTest.Models;
+using TechTestData.Repositories;
+using TechTestData.Repositories.Interface;
+using TechTestData.Models;
 using TechTest.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using TechTest.Data;
+using TechTestData.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

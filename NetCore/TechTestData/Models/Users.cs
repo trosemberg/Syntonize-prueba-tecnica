@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TechTest.Models
+namespace TechTestData.Models
 {
     [Index(nameof(Email), IsUnique = true)]
     public class Users : TEntity

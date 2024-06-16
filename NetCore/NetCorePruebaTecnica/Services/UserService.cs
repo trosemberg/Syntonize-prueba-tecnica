@@ -7,8 +7,8 @@ using System.Security.Cryptography;
 using System.Text;
 using TechTest.Configuration;
 using TechTest.DTO;
-using TechTest.Models;
-using TechTest.Repositories.Interface;
+using TechTestData.Models;
+using TechTestData.Repositories.Interface;
 using TechTest.Services.Interface;
 
 namespace TechTest.Services
@@ -43,7 +43,7 @@ namespace TechTest.Services
         public async Task<UsersDTO> UpdateAsync(UsersDTO usersDTO)
         {
             var user = _mapper.Map<Users>(usersDTO);
-            var role = await _rolesRepository.GetByIdAsync(usersDTO.RoleId!.Value);
+            var role = await _rolesRepository.GetByIdAsync(usersDTO.RolesId!.Value);
             user.RolesId = role?.Id;
             var dbUser = await _usersRepository.UpdateEntityAsync(user.Id, user);
             return _mapper.Map<UsersDTO>(dbUser);

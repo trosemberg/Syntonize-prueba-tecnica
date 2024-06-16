@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using TechTest.DTO;
-using TechTest.Models;
-using TechTest.Repositories.Interface;
+using TechTestData.Models;
+using TechTestData.Repositories.Interface;
 using TechTest.Services.Interface;
 
 namespace TechTest.Services
