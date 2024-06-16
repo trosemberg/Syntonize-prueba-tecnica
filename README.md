@@ -10,4 +10,4 @@ This project runs on Docker using also Redis and PostgreSQL on the same docker c
 - Copy Files from .Net Framework to .Net Project
 - Install Nuget Packages on new Versions on new .NetProject
 - Fix Dependecy Injections on .Net Project
-- Runt Tests and Application to Test Behaviors
+- Runt Tests and Application to Test Behaviors.
