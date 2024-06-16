@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using System;
 using TechTest.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -80,9 +79,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(builder.Configuration["AppSettings:ConnectionString"]));
+builder.Services.AddDbContext<DBContext>(options => options.UseNpgsql(builder.Configuration["AppSettings:ConnectionString"]));
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

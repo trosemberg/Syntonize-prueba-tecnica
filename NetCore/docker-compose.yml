@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  techtest:
+    image: ${DOCKER_REGISTRY-}techtest
+    container_name: techtest.api
+    build:
+      context: .
+      dockerfile: NetCorePruebaTecnica/Dockerfile
+    ports:
+        - "5000:5000"
+        - "5001:5001"
+ 
+  postgres:
+    image: postgres:latest
+    container_name: syntonize.database
+    environment:
+      POSTGRES_DB: syntonize
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./.containers/products-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  

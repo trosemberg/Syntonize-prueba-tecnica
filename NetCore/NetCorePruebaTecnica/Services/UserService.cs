@@ -60,7 +60,7 @@ namespace TechTest.Services
 
             user.Salt = salt;
 
-            var role = await _rolesRepository.GetByIdAsync(usersDTO.RoleId!.Value);
+            var role = await _rolesRepository.GetByIdAsync(usersDTO.RolesId!.Value);
             user.RolesId = role?.Id;
             await _usersRepository.InsertEntityAsync(user);
         }
