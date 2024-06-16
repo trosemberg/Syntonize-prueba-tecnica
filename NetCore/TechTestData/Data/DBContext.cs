@@ -14,6 +14,8 @@ namespace TechTestData.Data
         
         public DbSet<Users> Users { get; set; }
 
+        public DbSet<Products> Products { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Roles>().HasData(
